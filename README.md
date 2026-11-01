@@ -28,6 +28,24 @@ java -jar target/mvn-extractor-1.0.0-launcher.jar
 
 - Las bibliotecas nativas de 7-Zip van incluidas en el JAR (`sevenzipjbinding-all-platforms`).
 
+## Estructura
+
+```text
+src/main/java/com/juniverse/extractor/
+├── gui/        # ventanas; ExtractorFrame recibe por constructor los servicios
+├── service/
+│   ├── ExtractorService.java, SevenZipExtractorService.java  # contrato e implementación con 7-Zip-JBinding
+│   ├── ReportService.java, TextReportService.java            # contrato e implementación del informe
+│   └── ProgressView.java                                     # el servicio informa el progreso sin depender de Swing
+├── dto/, exception/, util/
+```
+
+## Pruebas
+
+```bash
+mvn test
+```
+
 ## Licencia
 
 Código de ejemplo de uso libre con fines educativos.

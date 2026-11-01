@@ -11,27 +11,19 @@ import javax.swing.table.AbstractTableModel;
 
 
 /**
- * The Class ExtractorTableModel.
- *
  * @author ajuar
  */
 public class ExtractorTableModel extends AbstractTableModel {
 
-	/** The Constant serialVersionUID. */
 	@Serial
     private static final long serialVersionUID = 1L;
 
-	/** The cols. */
+	/** Columnas. */
     private final String[] cols = {"Name", "Size", "Compressed", "Type", "Modified", "Crc"};
     
-    /** The entries. */
+    /** Entradas. */
     private transient List<ArchiveEntry> entries = List.of();
 
-    /**
-     * Sets the entries.
-     *
-     * @param list the new entries
-     */
     public void setEntries(List<ArchiveEntry> list) {
         this.entries = list.stream()
                 .sorted(Comparator.comparing(ArchiveEntry::getName))
@@ -39,54 +31,25 @@ public class ExtractorTableModel extends AbstractTableModel {
         fireTableDataChanged();
     }
 
-    /**
-     * Gets the entry.
-     *
-     * @param row the row
-     * @return the entry
-     */
     public ArchiveEntry getEntry(int row) {
         return entries.get(row);
     }
 
-    /**
-     * Gets the row count.
-     *
-     * @return the row count
-     */
     @Override
     public int getRowCount() {
         return entries.size();
     }
 
-    /**
-     * Gets the column count.
-     *
-     * @return the column count
-     */
     @Override
     public int getColumnCount() {
         return cols.length;
     }
 
-    /**
-     * Gets the column name.
-     *
-     * @param col the col
-     * @return the column name
-     */
     @Override
     public String getColumnName(int col) {
         return cols[col];
     }
 
-    /**
-     * Gets the value at.
-     *
-     * @param row the row
-     * @param col the col
-     * @return the value at
-     */
     @Override
     public Object getValueAt(int row, int col) {
         ArchiveEntry e = getEntry(row);

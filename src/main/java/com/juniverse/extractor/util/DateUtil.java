@@ -6,22 +6,16 @@ import java.time.Year;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 
-/**
- * The Class DateUtil.
- */
 public final class DateUtil {
 
-    /**
-     * Instantiates a new date util.
-     */
     private DateUtil() {
     }
 
     /**
-     * To local date time.
+     * Convierte el instante en fecha y hora local.
      *
-     * @param instant the instant
-     * @return the local date time
+     * @param instant instante
+     * @return fecha y hora local
      */
     public static LocalDateTime toLocalDateTime(Instant instant) {
         return LocalDateTime.ofInstant(
@@ -31,10 +25,10 @@ public final class DateUtil {
     }
 
     /**
-     * Format.
+     * Da formato al valor.
      *
-     * @param time the time
-     * @return the string
+     * @param time hora
+     * @return cadena
      */
     public static String format(long time) {
         DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")
@@ -42,11 +36,6 @@ public final class DateUtil {
         return fmt.format(Instant.ofEpochMilli(time));
     }
 
-    /**
-     * Gets the year.
-     *
-     * @return the year
-     */
     public static int getYear() {
         return Year.now().getValue();
     }

@@ -1,31 +1,19 @@
 package com.juniverse.extractor.util;
 
-/**
- * The Class StringUtil.
- */
 public final class StringUtil {
 
-    /**
-     * Instantiates a new string util.
-     */
     private StringUtil() {
     }
 
-    /**
-     * Checks for text.
-     *
-     * @param s the s
-     * @return true, if successful
-     */
     public static boolean hasText(final String s) {
         return s != null && !s.trim().isEmpty();
     }
 
     /**
-     * To format.
+     * Da formato al valor.
      *
-     * @param bytes the bytes
-     * @return the string
+     * @param bytes bytes
+     * @return cadena
      */
     public static String toFormat(long bytes) {
         if (bytes < 0) {
@@ -38,12 +26,6 @@ public final class StringUtil {
         return String.format("%.1f %cB", bytes / Math.pow(1024, exp), "KMGTPE".charAt(exp - 1));
     }
 
-    /**
-     * Gets the name.
-     *
-     * @param fileName the file name
-     * @return the name
-     */
     public static String getName(String fileName) {
         if (!hasText(fileName)) {
             return fileName;

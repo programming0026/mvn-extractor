@@ -22,38 +22,21 @@ import javax.swing.border.EmptyBorder;
 import static javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS;
 
 /**
- * The Class CommentDialog.
- *
  * @author ajuar
  */
 public class CommentDialog extends JDialog {
 
-    /** The Constant serialVersionUID. */
     @Serial
     private static final long serialVersionUID = 1L;
 	
-	/** The comment text area. */
+	/** Área de texto del comentario. */
 	private JTextArea commentTextArea;
 
-    /**
-     * Instantiates a new comment dialog.
-     *
-     * @param parent the parent
-     * @param fileName the file name
-     * @param comment the comment
-     */
     public CommentDialog(JFrame parent, String fileName, String comment) {
         super(parent, "Comment", true);
         initComponents(parent, fileName, comment);
     }
 
-    /**
-     * Initialize the components.
-     *
-     * @param parent the parent
-     * @param fileName the file name
-     * @param comment the comment
-     */
     private void initComponents(JFrame parent, String fileName, String comment) {
         setLayout(new BorderLayout(10, 10));
         setResizable(false);
@@ -113,7 +96,7 @@ public class CommentDialog extends JDialog {
     }
 
     /**
-     * Copy to clipboard.
+     * Copia el texto al portapapeles.
      */
     private void copyToClipboard() {
         commentTextArea.selectAll();

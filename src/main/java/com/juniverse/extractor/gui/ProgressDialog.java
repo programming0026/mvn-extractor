@@ -7,6 +7,7 @@ import java.io.Serial;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import com.juniverse.extractor.service.ProgressView;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -14,36 +15,24 @@ import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 
 /**
- * The Class ProgressDialog.
- *
  * @author ajuar
  */
-public class ProgressDialog extends JDialog {
+public class ProgressDialog extends JDialog implements ProgressView {
 
-    /** The Constant serialVersionUID. */
     @Serial
     private static final long serialVersionUID = 1L;
 	
-	/** The progress bar. */
+	/** Barra de progreso. */
 	private JProgressBar progressBar;
     
-    /** The lbl mensaje. */
+    /** Etiqueta del mensaje. */
     private JLabel lblMessage;
 
-    /**
-     * Instantiates a new progress dialog.
-     *
-     * @param parent the parent
-     * @param title the title
-     */
     public ProgressDialog(JFrame parent, String title) {
         super(parent, title, true);
         initComponents();
     }
 
-    /**
-     * Inits the components.
-     */
     private void initComponents() {
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         setSize(400, 150);
@@ -69,30 +58,27 @@ public class ProgressDialog extends JDialog {
         add(panelCentral, BorderLayout.CENTER);
     }
 
-    /**
-     * Sets the progress.
-     *
-     * @param valor the new progress
-     */
-    public void setProgress(int valor) {
-        progressBar.setValue(valor);
+    @Override
+    public void setProgress(int value) {
+        progressBar.setValue(value);
     }
 
-    /**
-     * Sets the mensaje.
-     *
-     * @param message the new mensaje
-     */
+    @Override
     public void setMessage(String message) {
         lblMessage.setText(message);
     }
 
-    /**
-     * Sets the indeterminate.
-     *
-     * @param indeterminate the new indeterminate
-     */
     public void setIndeterminate(boolean indeterminate) {
         progressBar.setIndeterminate(indeterminate);
+    }
+
+    @Override
+    public void open() {
+        setVisible(true);
+    }
+
+    @Override
+    public void close() {
+        dispose();
     }
 }

@@ -3,6 +3,8 @@ package com.juniverse.extractor.gui;
 import com.juniverse.extractor.dto.ArchiveInfo;
 import com.juniverse.extractor.service.ExtractorService;
 import com.juniverse.extractor.service.ReportService;
+import com.juniverse.extractor.service.SevenZipExtractorService;
+import com.juniverse.extractor.service.TextReportService;
 import com.juniverse.extractor.util.IconUtil;
 import com.juniverse.extractor.util.MessageUtil;
 import com.juniverse.extractor.util.StringUtil;
@@ -15,48 +17,61 @@ import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
- * The Class ExtractorFrame.
- *
  * @author ajuar
  */
 public class ExtractorFrame extends JFrame {
 
-    /** The Constant serialVersionUID. */
     @Serial
     private static final long serialVersionUID = 1L;
 	
-	/** The model. */
+	/** Modelo. */
 	private final ExtractorTableModel model = new ExtractorTableModel();
     
-    /** The status. */
+    /** Estado. */
     private final JLabel status = new JLabel("Ready");
     
-    /** The input file. */
+    /** Archivo de entrada. */
     private File inputFile;
     
-    /** The password. */
+    /** Contraseña. */
     private String password;
     
-    /** The current file. */
+    /** Servicio que lee y extrae archivos comprimidos. */
+    private final transient ExtractorService extractor;
+
+    /** Servicio que escribe el informe. */
+    private final transient ReportService reportService;
+
+    /** Archivo actual (nulo si aún no se abrió ninguno). */
     private transient ExtractorService currentFile;
     
-    /** The info. */
+    /** Información. */
     private transient ArchiveInfo info;
     
-    /** The extract btn. */
+    /** Botón de extraer. */
     private JButton extractBtn;
     
-    /** The comment btn. */
+    /** Botón de comentario. */
     private JButton commentBtn;
     
-    /** The report btn. */
+    /** Botón de informe. */
     private JButton reportBtn;
     
-    /**
-     * Instantiates a new extractor frame.
-     */
+    /** Crea la ventana con los servicios por defecto. */
     public ExtractorFrame() {
+        this(new SevenZipExtractorService(), new TextReportService());
+    }
+
+    /**
+     * Crea la ventana con los servicios indicados.
+     *
+     * @param extractor servicio que lee y extrae archivos comprimidos
+     * @param reportService servicio que escribe el informe
+     */
+    public ExtractorFrame(ExtractorService extractor, ReportService reportService) {
         super("Free Extractor");
+        this.extractor = extractor;
+        this.reportService = reportService;
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
         setSize(900, 600);
@@ -74,9 +89,9 @@ public class ExtractorFrame extends JFrame {
     }
     
     /**
-     * Creates the tool bar.
+     * Crea la barra de herramientas.
      *
-     * @return the jtoolbar
+     * @return barra de herramientas
      */
     private JToolBar createToolBar() {
         JToolBar bar = new JToolBar();
@@ -104,7 +119,7 @@ public class ExtractorFrame extends JFrame {
     }
     
     /**
-     * Extract selected.
+     * Extrae los elementos seleccionados.
      */
     private void extractSelected() {
         if (currentFile == null || info == null) {
@@ -126,12 +141,12 @@ public class ExtractorFrame extends JFrame {
     }
     
     /**
-     * Make button.
+     * Crea un botón.
      *
-     * @param text the text
-     * @param mnemonic the mnemonic
+     * @param text texto
+     * @param mnemonic tecla de acceso
      * @param al the al
-     * @return the j button
+     * @return botón
      */
     private JButton makeButton(String text, int mnemonic, java.awt.event.ActionListener al) {
         JButton b = new JButton(text);
@@ -144,7 +159,7 @@ public class ExtractorFrame extends JFrame {
     }
     
     /**
-     * Open.
+     * Abre un archivo.
      */
     private void open() {
         
@@ -155,7 +170,7 @@ public class ExtractorFrame extends JFrame {
                 return;
             }
             inputFile = fc.getSelectedFile();
-            currentFile = new ExtractorService();
+            currentFile = extractor;
             password = null;
             if (currentFile.requiresPassword(inputFile)) {
                 PasswordDialog dialog = new PasswordDialog(this, "Password required");
@@ -177,7 +192,7 @@ public class ExtractorFrame extends JFrame {
     }
     
     /**
-     * Generate report.
+     * Genera el informe.
      */
     private void generateReport() {
         if (currentFile == null || info == null) {
@@ -189,13 +204,12 @@ public class ExtractorFrame extends JFrame {
             return;
         }
         
-        ReportService reportService = new ReportService();
         reportService.generateReport(fc.getSelectedFile(), model);
         
     }
     
     /**
-     * Show comment.
+     * Muestra el comentario del archivo.
      */
     private void showComment() {
         if (currentFile == null || info == null) {
@@ -207,7 +221,7 @@ public class ExtractorFrame extends JFrame {
     }
     
     /**
-     * About.
+     * Muestra el cuadro «Acerca de».
      */
     private void about() {
         AboutDialog aboutDialog = new AboutDialog(this);

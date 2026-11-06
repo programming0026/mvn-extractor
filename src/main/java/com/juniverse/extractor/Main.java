@@ -6,7 +6,7 @@ import javax.swing.SwingUtilities;
 
 
 /**
- * @author ajuar
+ * @author Java Universe
  */
 public class Main {
 

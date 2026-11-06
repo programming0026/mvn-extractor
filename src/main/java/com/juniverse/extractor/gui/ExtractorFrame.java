@@ -17,7 +17,7 @@ import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
- * @author ajuar
+ * @author Java Universe
  */
 public class ExtractorFrame extends JFrame {
 

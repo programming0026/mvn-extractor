@@ -29,7 +29,7 @@ import net.sf.sevenzipjbinding.simple.ISimpleInArchive;
 import net.sf.sevenzipjbinding.simple.ISimpleInArchiveItem;
 
 /**
- * @author ajuar
+ * @author Java Universe
  */
 public class SevenZipExtractorService implements ExtractorService {
 

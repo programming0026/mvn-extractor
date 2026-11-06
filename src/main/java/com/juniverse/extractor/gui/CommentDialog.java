@@ -22,7 +22,7 @@ import javax.swing.border.EmptyBorder;
 import static javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS;
 
 /**
- * @author ajuar
+ * @author Java Universe
  */
 public class CommentDialog extends JDialog {
 

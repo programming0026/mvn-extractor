@@ -13,7 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 
 /**
- * @author ajuar
+ * @author Java Universe
  */
 public class PasswordDialog extends JDialog {
 

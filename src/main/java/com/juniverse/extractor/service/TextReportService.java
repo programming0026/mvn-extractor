@@ -11,7 +11,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 /**
- * @author ajuar
+ * @author Java Universe
  */
 public class TextReportService implements ReportService {
 

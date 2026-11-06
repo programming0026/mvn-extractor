@@ -11,7 +11,7 @@ import javax.swing.table.AbstractTableModel;
 
 
 /**
- * @author ajuar
+ * @author Java Universe
  */
 public class ExtractorTableModel extends AbstractTableModel {
 

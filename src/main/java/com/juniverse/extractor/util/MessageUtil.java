@@ -3,7 +3,7 @@ package com.juniverse.extractor.util;
 import javax.swing.JOptionPane;
 
 /**
- * @author ajuar
+ * @author Java Universe
  */
 public final class MessageUtil {
 
